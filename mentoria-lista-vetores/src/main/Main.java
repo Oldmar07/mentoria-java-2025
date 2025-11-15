@@ -5,9 +5,16 @@
 package main;
 
 import exercicios.Ex1;
+import exercicios.Ex10;
+import exercicios.Ex11;
 import exercicios.Ex2;
 import exercicios.Ex3;
 import exercicios.Ex4;
+import exercicios.Ex5;
+import exercicios.Ex6;
+import exercicios.Ex7;
+import exercicios.Ex8;
+import exercicios.Ex9;
 import java.util.Scanner;
 
 /**
@@ -73,43 +80,50 @@ public class Main {
                 }
                 case 5 -> {
                     System.out.println("----- EXERCICIO 5 -----");
-
+                    Ex5 e = new Ex5();
+                    e.ex5();
                     System.out.println();
                     break;
                 }
                 case 6 -> {
                     System.out.println("----- EXERCICIO 6 -----");
-
+                    Ex6 e = new Ex6();
+                    e.ex6();
                     System.out.println();
                     break;
                 }
                 case 7 -> {
                     System.out.println("----- EXERCICIO 7 -----");
-
+                    Ex7 e = new Ex7();
+                    e.ex7();
                     System.out.println();
                     break;
                 }
                 case 8 -> {
                     System.out.println("----- EXERCICIO 8 -----");
-
+                    Ex8 e = new Ex8();
+                    e.ex8();
                     System.out.println();
                     break;
                 }
                 case 9 -> {
                     System.out.println("----- EXERCICIO 9 -----");
-
+                    Ex9 e = new Ex9();
+                    e.ex9();
                     System.out.println();
                     break;
                 }
                 case 10 -> {
                     System.out.println("----- EXERCICIO 10 -----");
-
+                    Ex10 e = new Ex10();
+                    e.ex10();
                     System.out.println();
                     break;
                 }
                 case 11 -> {
                     System.out.println("----- EXERCICIO 11 -----");
-
+                    Ex11 e = new Ex11();
+                    e.ex11();
                     System.out.println();
                     break;
                 }

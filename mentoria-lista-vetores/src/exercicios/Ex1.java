@@ -15,6 +15,7 @@ public class Ex1 {
     public void ex1() {
         Scanner sc = new Scanner(System.in);
         int[] numeros = new int[0];
+        int negativos = 0;
         int n;
 
         do {
@@ -28,16 +29,23 @@ public class Ex1 {
         numeros = new int[n];
 
         for (int i = 0; i < n; i++) {
-            System.out.print("Diginte o " +(i+1)+ "o numero: ");
+            System.out.print("Diginte o " + (i + 1) + "o numero: ");
             numeros[i] = sc.nextInt();
-        }
-        
-        System.out.println();
-        System.out.println("Numeros negativos: ");
-        for (int numero: numeros){
-            if (numero < 0){
-                System.out.println(numero);
+            if (numeros[i] < 0) {
+                negativos += 1;
             }
+        }
+        if (negativos > 0) {
+            System.out.println();
+            System.out.println("Numeros negativos: ");
+            for (int numero : numeros) {
+                if (numero < 0) {
+                    System.out.println(numero);
+                }
+            }
+        } else {
+            System.out.println();                  
+            System.out.println("Nao ha numeros negativos.");
         }
     }
 }
