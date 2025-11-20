@@ -8,6 +8,7 @@ import entidades.Comentario;
 import entidades.Post;
 import entidades.Usuario;
 import enums.EstadosDeEspirito;
+import enums.Genero;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -19,6 +20,25 @@ import java.util.Scanner;
  * @author oldma
  */
 public class Programa {
+
+     public static void validarUser(String user) {
+        if (!user.startsWith("@")) {
+            System.out.println("Erro! O nome de usuario deve comecar com '@' ");
+            System.out.println();
+        }
+    }
+     
+    public static void validarSenha(String senha){
+        if (!senha.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$")){
+            System.out.println("FORMATO DE SENHA INVALIDO! A senha de ter: ");
+            System.out.println("- Pelo menos 8 caracteres;");
+            System.out.println("- Pelo menos uma letra minuscula;");
+            System.out.println("- Pelo menos uma letra maiusculas;");
+            System.out.println("- Pelo menos um numero;");
+            System.out.println();
+        }
+    }
+        
 
     public void programa() {
         Scanner sc = new Scanner(System.in);
@@ -34,16 +54,30 @@ public class Programa {
         System.out.println("CADASTRO DE USUARIO: ");
         System.out.print("NOME: ");
         String nome = sc.nextLine();
-        System.out.print("USERNAME: ");
-        String username = sc.nextLine();
+        
+        String username;
+        do {
+            System.out.print("USERNAME: ");
+            username = sc.nextLine();
+            validarUser(username);
+        } while (!username.startsWith("@"));
+        
+        System.out.print("GENERO: ");
+        Genero genero = Genero.valueOf(sc.nextLine().toUpperCase());
+        
+        String senha;
+        do{
         System.out.print("SENHA: ");
-        String senha = sc.nextLine();
+        senha = sc.nextLine();
+        validarSenha(senha);
+        }while(!senha.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$"));
+        
         System.out.print("DATA DE NASCIMENTO: ");
         String aniversario = sc.nextLine();
 
         LocalDate dataAni = LocalDate.parse(aniversario, fmt2);
 
-        Usuario u = new Usuario(nome, username, senha, dataAni);
+        Usuario u = new Usuario(nome, username, senha, dataAni, genero);
 
         do {
             System.out.println();
@@ -51,7 +85,7 @@ public class Programa {
             System.out.println("2- COMENTAR");
             System.out.println("3- VER POSTS");
             System.out.println("4- VER PERFIL DO USUARIO");
-            System.out.println("0-TERMINAR SESSAO");
+            System.out.println("0- TERMINAR SESSAO");
             System.out.print("ESCOLHA UMA OPCAO: ");
             op = sc.nextInt();
 
@@ -59,7 +93,7 @@ public class Programa {
                 case 1 -> {
 
                     System.out.println();
-                    System.out.println("CRIAR NOVO POST");
+                    System.out.println("---------------- CRIAR NOVO POST ------------------");
                     System.out.println();
                     sc.nextLine();
                     System.out.println("COMO ESTA SE SENTINDO HOJE? ");
@@ -91,11 +125,11 @@ public class Programa {
                         switch (op2) {
                             case 1 -> {
                                 if (posts.isEmpty()) {
-                                    System.out.print("NAO HA NENHUM POST DISPONIVEL! Deseja adicionar um post(S-Sim / N-Nao)? ");
+                                    System.out.print("NAO HA NENHUM POST DISPONIVEL! Deseja adicionar um post(S-Sim)? ");
                                     char resposta = sc.next().charAt(0);
                                     if (resposta == 'S' || resposta == 's') {
                                         System.out.println();
-                                        System.out.println("CRIAR NOVO POST");
+                                        System.out.println("---------------- CRIAR NOVO POST ------------------");
                                         System.out.println();
                                         sc.nextLine();
                                         System.out.println("COMO ESTA SE SENTINDO HOJE? ");
@@ -114,12 +148,10 @@ public class Programa {
                                         p = new Post(tituloPost, descricao, estado, momento, u);
                                         posts.add(p);
                                         break;
-                                    } 
-                                    else {
+                                    } else {
                                         break;
                                     }
-                                } 
-                                else {
+                                } else {
 
                                     for (Post pst : posts) {
                                         System.out.println(pst.toString());
@@ -133,10 +165,10 @@ public class Programa {
                                     for (Post pst : posts) {
                                         if (pst.getTitulo().equalsIgnoreCase(tituloPesquisa)) {
                                             System.out.println();
-                                            System.out.println("POST ENCONTRADO");
+                                            System.out.println("-_- POST ENCONTRADO -_-");
                                             System.out.println();
                                             System.out.println("ADICIONAR COMENTARIO");
-                                            System.out.print("ADICIONE A DESCRICAO DO COMENTARIO: ");
+                                            System.out.print("DESCRICAO DO COMENTARIO: ");
                                             String descricaoComent = sc.nextLine();
                                             LocalDateTime mmtC = LocalDateTime.now();
                                             String mmtCm = mmtC.format(fmt1);
@@ -144,8 +176,7 @@ public class Programa {
 
                                             Comentario cm = new Comentario(descricaoComent, momentoC);
                                             pst.adicionarComentario(cm);
-                                        } 
-                                        else {
+                                        } else {
                                             System.out.println("NAO EXISTE NENHUM POST COM ESSE TITULLO!");
                                         }
                                     }
@@ -156,28 +187,27 @@ public class Programa {
                                 if (posts.isEmpty()) {
                                     System.out.println("NAO HA POSTS DISPONIVEIS!\n");
                                     break;
-                                } 
-                                else {
+                                } else {
                                     System.out.println();
                                     for (Post pst : posts) {
                                         System.out.println(pst.toString());
                                         System.out.println();
                                     }
-                                    
+
                                     sc.nextLine();
-                                    System.out.print("DIGITE O TITULO DO POST DO COMENTARIO A APAGAR: ");
+                                    System.out.print("TITULO DO POST DO COMENTARIO A APAGAR: ");
                                     String tituloPesquisa = sc.nextLine().toUpperCase();
 
                                     for (Post pst : posts) {
                                         if (pst.getTitulo().equalsIgnoreCase(tituloPesquisa)) {
-                                            System.out.print("DIGITE O A POSICAO DO COMENTARIO QUE DESEJA APAGAR: ");
+                                            System.out.print("POSICAO DO COMENTARIO QUE DESEJA APAGAR: ");
                                             int index = sc.nextInt();
                                             index -= 1;
                                             pst.removerComentario(index);
+                                            System.out.println();
                                             System.out.println("COMENTARIO REMOVIDO COM SUCESSO...");
                                             break;
-                                        } 
-                                        else {
+                                        } else {
                                             System.out.println("NAO HA NENHUM POST COM ESSE TITULO! Tente outra vez.");
                                         }
                                     }

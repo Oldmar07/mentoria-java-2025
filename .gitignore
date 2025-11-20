@@ -1,5 +1,64 @@
-/exercicio-fixação-s11/nbproject/private/
-/exercicio-fixação-s11/build/
-/exercicio-fixação-s12/build/
-/mini-proj-post/nbproject/private/
-/mini-proj-post/build/
+# Artefatos de compilação (compilados)
+*.class
+*.war
+*.ear
+*.jar
+
+# Diretórios de saída da compilação
+bin/
+target/
+build/
+out/
+
+# Arquivos de log e temporários
+*.log
+*.tmp
+*.bak
+test-output/
+logs/
+
+# Configurações do Maven
+pom.xml.tag
+pom.xml.next
+pom.xml.bak
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.*
+.mvn/jvm.config
+
+# Configurações do Gradle
+.gradle/
+### Gradle ###
+.gradle/
+build/
+
+# Configurações do Eclipse
+.project
+.classpath
+.settings/
+
+# Configurações do IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Configurações do NetBeans
+nbproject/private/
+nbbuild/
+dist/
+.nb-gradle/
+maven-build/
+
+# Configurações do VS Code
+.vscode/
+
+# Específicos do sistema operacional (macOS, Windows)
+.DS_Store
+Thumbs.db
+
+# Arquivos de ambiente e segredos (NUNCA commitar credenciais!)
+.env
+keyfile.properties
+credentials.json

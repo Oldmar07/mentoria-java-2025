@@ -110,7 +110,7 @@ public class Post {
         sb.append("COMENTARIOS: \n");
 
         if (comentarios.isEmpty()) {
-            System.out.println("Ainda nao ha nenhum comentario.");
+            sb.append("Ainda nao ha nenhum comentario.\n");
         } else {
             for (Comentario c : comentarios) {
                 sb.append(c.toString()).append("\n");

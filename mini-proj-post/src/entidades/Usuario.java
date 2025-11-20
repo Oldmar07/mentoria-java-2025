@@ -4,6 +4,7 @@
  */
 package entidades;
 
+import enums.Genero;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -15,13 +16,15 @@ public class Usuario {
     private String nome;
     private String username;
     private String senha;
+    private Genero genero;
     private LocalDate aniversario;
 
-    public Usuario(String nome, String username, String senha, LocalDate aniversario) {
+    public Usuario(String nome, String username, String senha, LocalDate aniversario, Genero genero) {
         this.nome = nome;
         this.username = username;
         this.senha = senha;
         this.aniversario = aniversario;
+        this.genero = genero;
     }
     
     public Usuario(){
@@ -59,6 +62,14 @@ public class Usuario {
     public void setAniversario(LocalDate aniversario) {
         this.aniversario = aniversario;
     }
+    
+    public Genero getGenero() {
+        return genero;
+    }
+
+    public void setGenero(Genero genero) {
+        this.genero = genero;
+    }
 
     @Override
     public String toString() {
@@ -67,6 +78,7 @@ public class Usuario {
         sb.append("PERFIL DO USUARIO: ");
         sb.append("\nNOME: ").append(nome);
         sb.append("\nUSERNAME: ").append(username);
+        sb.append("\nGENERO: ").append(genero);
         sb.append("\nDATA DE NASCIMENTO: ").append(aniversario.format(fmt));
         return sb.toString();
     }
